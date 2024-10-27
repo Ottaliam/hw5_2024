@@ -1,47 +1,87 @@
-/* 1 */
+/* === 1 === */
 
+/* Define keyframe animation */
+@keyframes logo-grow {
+    from {
+        width: 25px;
+        opacity: 0;
+    }
 
-/* 2 */
+    to {
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+/* Apply animation to logo */
+#logo {
+    animation: 5s 1 logo-grow;
+}
+
+/* === 2 === */
+
 body {
-    /*font-family*/
+    /* Set fonts */
+    font-family: Poppins, serif;
+    /* Set background */
+    background-image: url("../images/concrete_seamless.png");
     background-color: #f1f1f1;
 }
 
-/* 3 */
+/* === 3 === */
+
+/* Use flex to match example */
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* 4 */
+/* === 4 === */
+
+/* Style nav_links class to match example with flex */
 .nav_links {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* The How to Get Started Video on Canvas used center
+       but according to the image provided the links are actually left-aligned */
+    align-items: flex-start;
 }
 
-/* 5 */
+/* === 5 === */
 
+/* Style links to have the same color after visited */
+a:link, a:visited {
+    color: rgb(0, 0, 238);
+}
 
-/* 6 */
+/* === 6 === */
+
+/* Style direct children of .card as required */
 .card > header {
     background-color: #288088;
     border: 2px solid #45ADAD;
     padding: 20px 0;
     border-radius: 50px 50px 0 0;
 }
-/* what else needs to be done? */
 
+/* .card has a white background
+ * it needs to have border-radius as well to match the header
+ */
+.card {
+    border-radius: 50px 50px 0 0;
+}
 
+/* === 7 === */
 
-
-/* 7 */
+/* Set flex initial size for .card */
 .card {
     flex-basis: 450px;
 }
 
-/* 8 */
+/* === 8 === */
+
+/* Style .pricing with flex */
 .pricing {
     display: flex;
     /* Since we are using flex-basis to set the initial width of .card, the direction must be row */
@@ -50,12 +90,120 @@ header {
     align-items: center;
 }
 
-/* 9 */
-.gallery img {
+/* === 9 === */
 
+/* Style images in .gallery */
+.gallery img {
+    border: 10px solid #50C7C7;
+    margin: 10px;
+    width: 300px;
 }
 
-/* 11 */
-@media screen and (min-width: 900px) {
+/* === 10 === */
 
+/* Style .gallery with flex to match example */
+.gallery {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+/* === 11~13: for screen-size greater than 900px === */
+@media screen and (min-width: 900px) {
+    /* === 11 === */
+
+    /* Style header with flex to match example */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Style .nav_links with flex to match example */
+    .nav_links {
+        flex-direction: row;
+    }
+
+    /* === 12 === */
+
+    /* Nothing with .pricing needs to change */
+    /* Style .card to match example */
+    .card {
+        flex-basis: 275px;
+    }
+
+    /* === 13 === */
+
+    /* Style first header so that it is visible when scrolling down */
+    body > header {
+        position: sticky;
+        top: 0;
+    }
+}
+
+/* === 14 === */
+
+/* Disable logo animation when prefers-reduced-motion is selected */
+@media (prefers-reduced-motion: reduce) {
+    #logo {
+        animation: none;
+    }
+}
+
+/* === 15~21: for print view === */
+@media print {
+    /* === 15 === */
+    /* === 16 === */
+
+    /* Change the font for body
+     * and remove background image (keep background color)
+     */
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+    }
+
+    /* === 17 === */
+
+    /* Style nav to match image */
+    nav {
+        width: 100%;
+    }
+
+    /* Style .nav_links to match image */
+    .nav_links {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    /* === 18 === */
+
+    /* Style .pricing to align items to the bottom */
+    .pricing {
+        align-items: flex-end;
+        /* Set to nowrap since in the example image the size for .card is clearly
+         * smaller than 325px setting below, so there is shrinking */
+        flex-flow: row nowrap;
+    }
+
+    /* === 19 === */
+
+    /* Style .card as required */
+    .card {
+        border: 2px solid #45ADDD;
+        flex-basis: 325px;
+    }
+
+    /* === 20 === */
+
+    /* Remove gallery from page */
+    #gallery, .gallery {
+        display: none;
+    }
+
+    /* === 21 === */
+
+    /* Add thumb-up as in the example */
+    .card ul li:nth-child(2)::after {
+        content: '👍';
+    }
 }
